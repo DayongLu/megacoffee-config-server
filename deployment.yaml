@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: attic-space-config-server
+  namespace: atticspace
+spec:
+  selector:
+    matchLabels:
+      app: as-config-server
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: as-config-server
+    spec:
+      containers:
+      - name: as-config-server
+        imagePullPolicy: Always
+        image: ludayong20/attic-space-config-server:latest
+        ports:
+        - containerPort: 8888
+          name: restapi
+        env:
+        - name: SPRING_CLOUD_CONFIG_SERVER_GIT_URI
+          valueFrom:
+            configMapKeyRef:
+              name: attic-space-configserver-cm
+              key: github.uri
+        - name: SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: as-github-credential
+              key: username
+        - name: SPRING_CLOUD_CONFIG_SERVER_GIT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: as-github-credential
+              key: password
