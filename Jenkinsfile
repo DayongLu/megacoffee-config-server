@@ -14,6 +14,14 @@ pipeline{
             }
 
         }
+
+        stage('STATIC'){
+            steps{
+                checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'target/checkstyle-result.xml', unHealthy: ''
+                findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: 'target/findbugsXml.xml', unHealthy: ''
+
+            }
+        }
         stage('BUILD'){
             steps {
                 withMaven(maven: 'mvn-3.5.2'){
