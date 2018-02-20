@@ -16,7 +16,7 @@ pipeline{
         }
         stage('BUILD'){
             steps {
-                withMaven(){
+                withMaven(maven: 'mvn-3.5.2'){
                     sh 'mvn clean package'
                 }
 
