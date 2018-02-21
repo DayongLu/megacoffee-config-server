@@ -51,7 +51,7 @@ pipeline{
                  def server = Artifactory.server 'paradyme-artifactory'
                  def rtMaven = Artifactory.newMavenBuild()
                  def buildInfo
-                 rtMaven.tool = maven // Tool name from Jenkins configuration
+                 rtMaven.tool = 'mvn-3.5.2' // Tool name from Jenkins configuration
                  rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
                  rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
                  buildInfo = Artifactory.newBuildInfo()
