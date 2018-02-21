@@ -15,15 +15,12 @@ pipeline{
 
         }
 
-        stage('STATIC'){
+        stage('SonarQube Analysis'){
             steps{
-                checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'target/checkstyle-result.xml', unHealthy: ''
-                findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: 'target/findbugsXml.xml', unHealthy: ''
-                withMaven(maven: 'mvn-3.5.2'){
-                                    sh 'mvn sonar:sonar \
-                                          -Dsonar.host.url=http://18.219.80.119:9000 \
-                                          -Dsonar.login=ba5f3d138b0d64b62083b05a64a4e5807b5014e4'
-                                }
+                withSonarQubeEnv('Paradyme-SonarQube-Server') {
+                      // requires SonarQube Scanner for Maven 3.2+
+                      sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+                    }
             }
         }
         stage('BUILD'){
