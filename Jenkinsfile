@@ -55,6 +55,7 @@ pipeline{
                  rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
                  rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
                  buildInfo = Artifactory.newBuildInfo()
+                 buildInfo.retention maxBuilds: 3, maxDays: 7, doNotDiscardBuilds: ["3"], deleteBuildArtifacts: true
                  rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildInfo
                  server.publishBuildInfo buildInfo
 
