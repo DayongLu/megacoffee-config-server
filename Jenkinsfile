@@ -5,18 +5,9 @@ pipeline{
         jdk 'jdk8'
     }
     stages{
-        stage('Initialize'){
-            steps{
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
-            }
-
-        }
 
 
-        stage('BUILD'){
+        stage('Build'){
             steps {
                 withMaven(maven: 'mvn-3.5.2'){
                     sh 'mvn clean package'
@@ -53,6 +44,26 @@ pipeline{
                 }
             }
         }
+
+        stage("Distribute to Artifactory"){
+            steps{
+                script{
+                 def server = Artifactory.server 'paradyme-artifactory'
+                 def rtMaven = Artifactory.newMavenBuild()
+                 def buildInfo
+                 rtMaven.tool = maven // Tool name from Jenkins configuration
+                 rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
+                 rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
+                 buildInfo = Artifactory.newBuildInfo()
+                 rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildInfo
+                 server.publishBuildInfo buildInfo
+
+                }
+
+            }
+        }
+
+
 
     }
 }
