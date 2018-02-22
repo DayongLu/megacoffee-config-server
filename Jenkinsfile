@@ -69,7 +69,7 @@ pipeline{
         stage("Trigger Image build Job"){
             steps{
                 script{
-                    def job = build job: 'attic-space-config-server-deployment', parameters: [[$class: 'StringParameterValue', name: 'buildName', value: buildInfo.getName()], [$class: 'StringParameterValue', name: 'buildNum', value: buildInfo.getNumber()], [$class: 'StringParameterValue', name: 'imageName', value: 'as-config-server']]
+                    def job = build job: 'attic-space-config-server-deployment', parameters: [[$class: 'StringParameterValue', name: 'buildName', value: buildInfo.name], [$class: 'StringParameterValue', name: 'buildNum', value: buildInfo.number], [$class: 'StringParameterValue', name: 'imageName', value: 'as-config-server']]
 
                 }
 
