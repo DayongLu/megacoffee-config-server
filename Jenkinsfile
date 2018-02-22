@@ -68,7 +68,10 @@ pipeline{
 
         stage("Trigger Image build Job"){
             steps{
-                def job = build job: 'project-c', parameters: [[$class: 'StringParameterValue', name: 'buildName', value: buildInfo.getName()], [$class: 'StringParameterValue', name: 'buildNum', value: buildInfo.getNumber()], [$class: 'StringParameterValue', name: 'imageName', value: 'as-config-server']]
+                script{
+                    def job = build job: 'project-c', parameters: [[$class: 'StringParameterValue', name: 'buildName', value: buildInfo.getName()], [$class: 'StringParameterValue', name: 'buildNum', value: buildInfo.getNumber()], [$class: 'StringParameterValue', name: 'imageName', value: 'as-config-server']]
+
+                }
 
             }
         }
