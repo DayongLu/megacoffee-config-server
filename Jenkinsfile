@@ -1,3 +1,6 @@
+def server = Artifactory.server 'paradyme-artifactory'
+def rtMaven = Artifactory.newMavenBuild()
+def buildInfo
 pipeline{
     agent any
     tools{
@@ -48,9 +51,8 @@ pipeline{
         stage("Distribute to Artifactory"){
             steps{
                 script{
-                 def server = Artifactory.server 'paradyme-artifactory'
-                 def rtMaven = Artifactory.newMavenBuild()
-                 def buildInfo
+
+
                  rtMaven.tool = 'mvn-3.5.2' // Tool name from Jenkins configuration
                  rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
                  rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
@@ -60,6 +62,13 @@ pipeline{
                  server.publishBuildInfo buildInfo
 
                 }
+
+            }
+        }
+
+        stage("Trigger Image build Job"){
+            steps{
+                def job = build job: 'project-c', parameters: [[$class: 'StringParameterValue', name: 'buildName', value: buildInfo.getName()], [$class: 'StringParameterValue', name: 'buildNum', value: buildInfo.getNumber()], [$class: 'StringParameterValue', name: 'imageName', value: 'as-config-server']]
 
             }
         }
