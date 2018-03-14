@@ -59,6 +59,7 @@ pipeline{
                  buildInfo = Artifactory.newBuildInfo()
                  buildInfo.retention maxBuilds: 3, maxDays: 7, doNotDiscardBuilds: ["3"], deleteBuildArtifacts: true
                  rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildInfo
+                 buildInfo.name = 'as-config-server'
                  server.publishBuildInfo buildInfo
 
                 }
