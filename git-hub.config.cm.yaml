@@ -1,7 +1,0 @@
-apiVersion: v1
-data:
-  github.uri: https://github.com/paradyme-management/attic-space-config.git
-kind: ConfigMap
-metadata:
-  name: attic-space-configserver-cm
-  namespace: atticspace
