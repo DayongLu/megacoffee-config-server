@@ -10,7 +10,7 @@ spring:
       - id: as-controller-get-request-status
         uri: http://as-controller.atticspace:8080/atticspace
         predicates:
-        - Path=/as-controller/getRequest/{requestId}
+        - Path=/as-controller/request/{requestId}
         - Method=GET
         filters:
         - SetPath=/request/{requestId}
