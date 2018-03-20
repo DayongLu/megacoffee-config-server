@@ -1,16 +1,21 @@
-spring:
-  cloud:
-    gateway:
-      routes:
-      - id: as-controller-submit-request
-        uri: http://as-controller.atticspace:8080/atticspace/request
-        predicates:
-        - Path=/as-controller/request
-        - Method=POST
-      - id: as-controller-get-request-status
-        uri: http://as-controller.atticspace:8080/atticspace
-        predicates:
-        - Path=/as-controller/getRequest/{requestId}
-        - Method=GET
-        filters:
-        - SetPath=/request/{requestId}
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: as-controller-submit-request
+#        uri: http://as-controller.atticspace:8080/atticspace/request
+#        predicates:
+#        - Path=/as-controller/request
+#        - Method=POST
+#      - id: as-controller-get-request-status
+#        uri: http://as-controller.atticspace:8080/atticspace
+#        predicates:
+#        - Path=/as-controller/getRequest/{requestId}
+#        - Method=GET
+#        filters:
+#        - SetPath=/request/{requestId}
+
+atticspace:
+  controller:
+    host: as-controller.atticspace
+    port: 8080
