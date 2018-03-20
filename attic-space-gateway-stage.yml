@@ -17,5 +17,5 @@
 
 atticspace:
   controller:
-    host: as-controller.atticspace
+    host: as-controller.atticspace-stage
     port: 8080
