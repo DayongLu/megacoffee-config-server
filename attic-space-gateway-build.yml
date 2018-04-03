@@ -17,5 +17,5 @@
 
 atticspace:
   controller:
-    host: as-controller.atticspace
+    host: as-controller.atticspace-test
     port: 8080
