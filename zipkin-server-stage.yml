@@ -1,7 +1,7 @@
 spring:
   datasource:
     schema: classpath:/mysql.sql
-    url: jdbc:mysql://demo-mysql.middleware.svc.cluster.local:3306/zipkinStage?createDatabaseIfNotExist=true
+    url: jdbc:mysql://demo-mysql-mysql.middlewar.svc.cluster.local:3306/zipkinStage?createDatabaseIfNotExist=true
     username: root
     password: changeme
     driver-class-name: com.mysql.jdbc.Driver
