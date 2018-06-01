@@ -6,4 +6,3 @@ spring:
         uri: lb://trace-monitor-api/tracemonitor/request
         predicates:
         - Path=/tracemonitor/request
-        - Method=GET
