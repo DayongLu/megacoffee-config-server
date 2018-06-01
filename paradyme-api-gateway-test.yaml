@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: request-route
+        uri: lb://trace-monitor-api/tracemonitor/request
+        predicates:
+        - Path=/tracemonitor/request
+        - Method=GET
