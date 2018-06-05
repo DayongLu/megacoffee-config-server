@@ -9,4 +9,4 @@ spring:
       - id: event-route
         uri: lb://event-inbound-processor/event-inbound/event
         predicates:
-        - Path=/event
+        - Path=/event-inbound/event
