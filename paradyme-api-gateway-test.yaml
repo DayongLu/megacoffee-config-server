@@ -6,7 +6,7 @@ spring:
         uri: lb://trace-monitor-api/tracemonitor/request
         predicates:
         - Path=/tracemonitor/request
-      - id: request-route
+      - id: event-route
         uri: lb://event-inbound-processor/event-inbound/event
         predicates:
         - Path=/event
