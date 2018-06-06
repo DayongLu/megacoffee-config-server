@@ -3,10 +3,14 @@ spring:
     gateway:
       routes:
       - id: request-route
-        uri: lb://trace-monitor-api/tracemonitor/request
+        uri: lb://trace-monitor-api
         predicates:
-        - Path=/tracemonitor/request
+        - Path=/tracemonitor/request/{requestId}
+        filters:
+        - SetPath=/tracemonitor/request/{requestId}
       - id: event-route
-        uri: lb://event-inbound-processor/event-inbound/event
+        uri: lb://event-inbound-processor
         predicates:
         - Path=/event-inbound/event
+        filters:
+        - SetPath=/event-inbound/event
