@@ -14,6 +14,7 @@ spring:
         - Path=/tracemonitor/request
         filters:
         - SetPath=/tracemonitor/request
+        - AddResponseHeader=Access-Control-Allow-Origin, *
       - id: event-route
         uri: lb://event-inbound-processor
         predicates:
