@@ -20,3 +20,13 @@ spring:
         - Path=/event-inbound/event
         filters:
         - SetPath=/event-inbound/event
+      - id: get-all-request-route
+        uri: lb://trace-monitor-api
+        predicates:
+        - Path=/cb
+        filters:
+        - name: Hystrix
+          args:
+            name: fallbackcmd
+            fallbackUri: forward:/tracemonitor/request/error
+        - SetPath=/tracemonitor/request/delay
