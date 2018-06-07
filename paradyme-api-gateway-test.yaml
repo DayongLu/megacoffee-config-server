@@ -26,10 +26,7 @@ spring:
         predicates:
         - Path=/cb
         filters:
-        - name: Hystrix
-          args:
-            name: fallbackcmd
-            fallbackUri: forward:/tracemonitor/request/error
+        - Hystrix=fallbackcmd
         - SetPath=/tracemonitor/request/delay
 
 hystrix:
