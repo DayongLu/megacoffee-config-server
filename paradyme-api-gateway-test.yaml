@@ -26,8 +26,11 @@ spring:
         predicates:
         - Path=/cb
         filters:
-        - Hystrix=fallbackcmd
+        - name: Hystrix
+          args:
+            name: fallbackcmd
+            fallbackUri: /tracemonitor/request/error
         - SetPath=/tracemonitor/request/delay
-management.endpoints.web.exposure.include: hystrix.stream
+
 
 hystrix.command.fallbackcmd.execution.isolation.thread.timeoutInMilliseconds: 5000
