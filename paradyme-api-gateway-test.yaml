@@ -28,11 +28,6 @@ spring:
         filters:
         - Hystrix=fallbackcmd
         - SetPath=/tracemonitor/request/delay
+management.endpoints.web.exposure.include: hystrix.stream
 
-hystrix:
-  command:
-    fallbackcmd:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 5000
+hystrix.command.fallbackcmd.execution.isolation.thread.timeoutInMilliseconds: 5000
