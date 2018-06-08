@@ -29,7 +29,7 @@ spring:
         - name: Hystrix
           args:
             name: fallbackcmd
-            fallbackUri: /tracemonitor/request/error
+            fallbackUri: forward:/tracemonitor/request/error
         - SetPath=/tracemonitor/request/delay
 
 
