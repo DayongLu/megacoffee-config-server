@@ -37,6 +37,10 @@ spring:
             name: fallbackcmd
             fallbackUri: forward:/tracemonitor/request/error
         - SetPath=/tracemonitor/request/delay
-
-
-hystrix.command.fallbackcmd.execution.isolation.thread.timeoutInMilliseconds: 5000
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
