@@ -8,6 +8,12 @@ spring:
         - Path=/tracemonitor/request/{requestId}
         filters:
         - SetPath=/tracemonitor/request/{requestId}
+      - id: trace-monitor-api-actuator
+        uri: lb://trace-monitor-api
+        predicates:
+        - Path=/tracemonitor/actuator/{requestId}
+        filters:
+        - SetPath=/actuator/{requestId}
       - id: get-all-request-route
         uri: lb://trace-monitor-api
         predicates:
