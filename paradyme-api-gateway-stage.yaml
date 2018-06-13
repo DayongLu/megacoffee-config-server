@@ -3,32 +3,32 @@ spring:
     gateway:
       routes:
       - id: request-route
-        uri: lb://trace-monitor-api
+        uri: lb://trace-monitor-api-blue
         predicates:
         - Path=/tracemonitor/request/{requestId}
         filters:
         - SetPath=/tracemonitor/request/{requestId}
       - id: trace-monitor-api-actuator
-        uri: lb://trace-monitor-api
+        uri: lb://trace-monitor-api-blue
         predicates:
         - Path=/tracemonitor/actuator/{requestId}
         filters:
         - SetPath=/actuator/{requestId}
       - id: get-all-request-route
-        uri: lb://trace-monitor-api
+        uri: lb://trace-monitor-api-blue
         predicates:
         - Path=/tracemonitor/request
         filters:
         - SetPath=/tracemonitor/request
         - AddResponseHeader=Access-Control-Allow-Origin, *
       - id: event-route
-        uri: lb://event-inbound-processor
+        uri: lb://event-inbound-processor-blue
         predicates:
         - Path=/event-inbound/event
         filters:
         - SetPath=/event-inbound/event
       - id: get-all-request-route
-        uri: lb://trace-monitor-api
+        uri: lb://trace-monitor-api-blue
         predicates:
         - Path=/cb
         filters:
