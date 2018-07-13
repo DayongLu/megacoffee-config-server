@@ -3,19 +3,19 @@ spring:
     gateway:
       routes:
       - id: request-route
-        uri: lb://trace-monitor-api-blue
+        uri: lb://trace-monitor-api-green
         predicates:
         - Path=/tracemonitor/request/{requestId}
         filters:
         - SetPath=/tracemonitor/request/{requestId}
       - id: trace-monitor-api-actuator
-        uri: lb://trace-monitor-api-blue
+        uri: lb://trace-monitor-api-green
         predicates:
         - Path=/tracemonitor/actuator/{requestId}
         filters:
         - SetPath=/actuator/{requestId}
       - id: get-all-request-route
-        uri: lb://trace-monitor-api-blue
+        uri: lb://trace-monitor-api-green
         predicates:
         - Path=/tracemonitor/request
         filters:
@@ -28,7 +28,7 @@ spring:
         filters:
         - SetPath=/event-inbound/event
       - id: get-all-request-route
-        uri: lb://trace-monitor-api-blue
+        uri: lb://trace-monitor-api-green
         predicates:
         - Path=/cb
         filters:
