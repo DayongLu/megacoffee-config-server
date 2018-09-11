@@ -25,28 +25,7 @@ pipeline{
             }
         }
 
-        stage('SonarQube Analysis'){
-            steps{
-                withSonarQubeEnv('Paradyme-SonarQube-Server') {
-                      // requires SonarQube Scanner for Maven 3.2+
-                      sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
-                    }
-            }
-        }
 
-        stage("SonarQube Quality Gate") {
-            steps{
-                timeout(time: 1, unit: 'HOURS') {
-                   script {
-                       def qg = waitForQualityGate()
-                       if (qg.status != 'OK') {
-                         error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                       }
-                   }
-
-                }
-            }
-        }
 
         stage("Distribute to Artifactory"){
             steps{
