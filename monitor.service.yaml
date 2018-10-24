@@ -1,0 +1,142 @@
+#apiVersion: monitoring.coreos.com/v1
+#kind: ServiceMonitor
+#metadata:
+#  labels:
+#    app: soa-service
+#    prometheus: soa
+#  name: soa-service
+#  namespace: monitoring
+#spec:
+#  endpoints:
+#  - interval: 10s
+#    port: restapi
+#    path: /actuator/prometheus
+#  jobLabel: soa-job
+#  namespaceSelector:
+#    matchNames:
+#    - middleware
+#    - attic-space-stage
+#  selector:
+#    matchLabels:
+#      prometheus: soa
+#      purpose: monitor
+#
+#
+#---
+#apiVersion: monitoring.coreos.com/v1
+#kind: Prometheus
+#metadata:
+#  namespace: monitoring
+#  name: prometheus-soa
+#  labels:
+#    prometheus: soa
+#spec:
+#  storage:
+#    volumeClaimTemplate:
+#      spec:
+#        storageClassName: default
+#        resources:
+#          requests:
+#            storage: 40Gi
+#  serviceAccountName: prometheus-k8s
+#  replicas: 2
+#  resources:
+#    requests:
+#      memory: 400Mi
+#  alerting:
+#    alertmanagers:
+#    - name: alertmanager-main
+#      namespace: monitoring
+#      port: web
+#    baseImage: quay.io/prometheus/prometheus
+#  serviceMonitorSelector:
+#    matchLabels:
+#      prometheus: soa
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  labels:
+#    prometheus: soa
+#  name: prometheus-soa
+#  namespace: monitoring
+#spec:
+#  type: LoadBalancer
+#  ports:
+#  - name: web
+#    port: 9090
+#    targetPort: web
+#  selector:
+#    app: prometheus
+#    prometheus: prometheus-soa
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  labels:
+#    prometheus: soa
+#    purpose: monitor
+#  name: trace-monitor-persistence-router-svc
+#  namespace: attic-space-stage
+#spec:
+##  type: LoadBalancer
+#  ports:
+#  - name: restapi
+#    port: 8080
+#    targetPort: 8080
+#  selector:
+#    app: trace-monitor-persistence-router
+##    prometheus: prometheus-soa
+
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  labels:
+#    prometheus: soa
+#    purpose: monitor
+#  name: trace-monitor-api-svc
+#  namespace: attic-space-stage
+#spec:
+#  #  type: LoadBalancer
+#  ports:
+#  - name: restapi
+#    port: 8080
+#    targetPort: 8080
+#  selector:
+#    app: trace-monitor-api-blue
+##    prometheus: prometheus-soa
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  labels:
+#    prometheus: soa
+#    purpose: monitor
+#  name: trace-monitor-ui-svc
+#  namespace: attic-space-stage
+#spec:
+##    type: LoadBalancer
+#  ports:
+#  - name: restapi
+#    port: 8080
+#    targetPort: 8080
+#  selector:
+#    app: trace-monitor-ui-blue
+##    prometheus: prometheus-soa
+
+
+---
+kind: SecurityContextConstraints
+apiVersion: v1
+metadata:
+  name: hostpath
+allowPrivilegedContainer: true
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+fsGroup:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
