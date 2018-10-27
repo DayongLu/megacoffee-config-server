@@ -30,8 +30,8 @@ pipeline{
         stage('Build and Push Docker Image to Paradyme Artifactory'){
             steps {
                 script {
-                    def customImage = docker.build("registry.cn-beijing.aliyuncs.com/megacoffee/config-server:${params.buildNum}", ".")
-                    docker.withRegistry("https://registry.cn-beijing.aliyuncs.com"){
+                    def customImage = docker.build("registry-vpc.cn-beijing.aliyuncs.com/megacoffee/config-server:${params.buildNum}", ".")
+                    docker.withRegistry("https://registry-vpc.cn-beijing.aliyuncs.com/megacoffee"){
                         customImage.push()
                         customImage.push('latest')
                     }
