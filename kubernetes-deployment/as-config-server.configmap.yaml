@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  github.uri: https://github.com/DayongLu/mc-applications-configuration.git
+kind: ConfigMap
+metadata:
+  name: mc-config-server-config
+  namespace: middleware

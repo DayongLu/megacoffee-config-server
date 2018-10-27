@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mc-config-server
+  namespace: middleware
+spec:
+  selector:
+    matchLabels:
+      app: mc-config-server
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: mc-config-server
+    spec:
+      imagePullSecrets:
+      - name: image-registry-secret
+      containers:
+      - name: mc-config-server
+        imagePullPolicy: Always
+        image: registry-vpc.cn-beijing.aliyuncs.com/megacoffee/config-server:latest
+        ports:
+        - containerPort: 8888
+          name: restapi
+        env:
+        - name: SPRING_CLOUD_CONFIG_SERVER_GIT_URI
+          valueFrom:
+            configMapKeyRef:
+              name: mc-config-server-config
+              key: github.uri
+        - name: SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mc-secret
+              key: username
+        - name: SPRING_CLOUD_CONFIG_SERVER_GIT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mc-secret
+              key: password

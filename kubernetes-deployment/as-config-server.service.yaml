@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: as-config-service
+  namespace: paradyme-as-middleware
+  labels:
+    prometheus: soa
+spec:
+  selector:
+    app: as-config-server
+  type: LoadBalancer
+  ports:
+  - protocol: restapi
+    port: 8888
+    targetPort: 8888

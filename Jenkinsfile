@@ -39,7 +39,13 @@ pipeline{
             }
         }
 
+        stage('Deploy to MegaCoffee K8S'){
 
+            steps{
+                sh "kubectl apply -f kubernetes-deployment/"
+
+            }
+        }
 
 
 
