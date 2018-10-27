@@ -1,14 +1,14 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: as-config-service
-  namespace: paradyme-as-middleware
+  name: mc-config-service
+  namespace: middleware
   labels:
-    prometheus: soa
+    prometheus: magecoffee
 spec:
   selector:
-    app: as-config-server
-  type: LoadBalancer
+    app: mc-config-server
+  type: ClusterIP
   ports:
   - protocol: restapi
     port: 8888
