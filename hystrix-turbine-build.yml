@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: hystrix-turbine
-turbine:
-  instanceUrlSuffix: /actuator/hystrix.stream
-  app-config: paradyme-api-gateway,trace-monitor-api
-  cluster-name-expression: "'default'"
-  combine-host-port: true
