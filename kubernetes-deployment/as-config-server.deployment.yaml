@@ -31,7 +31,7 @@ spec:
           value: "true"
         - name: SPRING_BOOT_ADMIN_CLIENT_URL
           value: "http://ms-admin-svc.development.svc.cluster.local:8080"
-        - name:
+#        - name:
 #        - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
 #          value: "http://eureka-dev-svc.development.svc.cluster.local:8761/eureka"
 #        - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES
