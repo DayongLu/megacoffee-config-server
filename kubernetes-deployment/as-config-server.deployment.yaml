@@ -24,7 +24,7 @@ spec:
           name: restapi
         env:
         - name: MANAGEMENT_SECURITY_ENABLED
-          value: false
+          value: "false"
         - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
           value: "*"
 #        - name: SPRING_BOOT_ADMIN_CLIENT_INSTANCE_PREFER-IP
