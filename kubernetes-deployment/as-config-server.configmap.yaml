@@ -4,4 +4,4 @@ data:
 kind: ConfigMap
 metadata:
   name: mc-config-server-config
-  namespace: middleware
+  namespace: development
