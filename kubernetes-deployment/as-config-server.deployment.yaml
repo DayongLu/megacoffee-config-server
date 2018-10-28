@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: mc-config-server
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
@@ -23,6 +23,20 @@ spec:
         - containerPort: 8888
           name: restapi
         env:
+        - name: MANAGEMENT_SECURITY_ENABLED
+          value: false
+        - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+          value: "*"
+#        - name: SPRING_BOOT_ADMIN_CLIENT_INSTANCE_PREFER-IP
+#          value: true
+#        - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+#          value: "http://eureka-dev-svc.development.svc.cluster.local:8761/eureka"
+#        - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES
+#          value: "kafka-zookeeper-0.kafka-zookeeper-headless.kafka.svc.cluster.local:2181,kafka-zookeeper-1.kafka-zookeeper-headless.kafka.svc.cluster.local:2181,kafka-zookeeper-2.kafka-zookeeper-headless.kafka.svc.cluster.local:2181"
+#        - name: SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS
+#          value: "kafka-0.kafka-headless.kafka.svc.cluster.local:9092,kafka-1.kafka-headless.kafka.svc.cluster.local:9092,kafka-2.kafka-headless.middleware.svc.cluster.local:9092"
+        - name: SERVER_PORT
+          value: 8888
         - name: SPRING_CLOUD_CONFIG_SERVER_GIT_URI
           valueFrom:
             configMapKeyRef:
