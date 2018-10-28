@@ -23,6 +23,8 @@ spec:
         - containerPort: 8888
           name: restapi
         env:
+        - name: SPRING_APPLICATION_NAME
+          value: "config-server"
         - name: MANAGEMENT_SECURITY_ENABLED
           value: "false"
         - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
